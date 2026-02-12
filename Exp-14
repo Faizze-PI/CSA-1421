@@ -1,0 +1,12 @@
+#include <stdio.h>
+void main() {
+    char exp[50];
+    printf("Enter a simple expression (e.g., a=b+c): ");
+    scanf("%s", exp);
+    printf("\nThree Address Code:\n");
+    printf("Result: %c\n", exp[0]);
+    printf("Op 1:   %c\n", exp[2]);
+    printf("Op:     %c\n", exp[3]);
+    printf("Op 2:   %c\n", exp[4]);    
+    printf("\nGenerated TAC: %c := %c %c %c\n", exp[0], exp[2], exp[3], exp[4]);
+}
