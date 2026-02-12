@@ -1,0 +1,29 @@
+#include <stdio.h>
+void main() {
+    char code[] = "int a; // single comment \n a = 5; /* multi \n comment */";
+    int i = 0;
+    while (code[i] != '\0') {
+        // Look for the start of a comment
+        if (code[i] == '/') {
+            // 1. Check for //
+            if (code[i + 1] == '/') {
+                printf("Comment found: ");
+                while (code[i] != '\n' && code[i] != '\0') {
+                    putchar(code[i++]);
+                }
+                printf("\n");
+            } 
+            // 2. Check for /*
+            else if (code[i + 1] == '*') {
+                printf("Comment found: ");
+                while (code[i] != '\0') {
+                    putchar(code[i++]);
+                    if (code[i-2] == '*' && code[i-1] == '/') break;
+                }
+                printf("\n");
+            }
+            else i++; // Just a '/' operator
+        } 
+        else i++; // Regular code character
+    }
+}
