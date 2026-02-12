@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+void main() {
+    char code[] = "   sum = 10 + 20; // single-line \n /* multi-line \n comment */ x = 5;";
+    int i = 0;
+
+    while (code[i] != '\0') {
+        // 1. Skip Spaces, Tabs, and Newlines
+        if (isspace(code[i])) {
+            i++;
+            continue;
+        }
+
+        // 2. Handle Comments
+        if (code[i] == '/') {
+            if (code[i + 1] == '/') { // Single-line
+                while (code[i] != '\n' && code[i] != '\0') i++;
+                continue;
+            } 
+            else if (code[i + 1] == '*') { // Multi-line
+                i += 2;
+                while (!(code[i] == '*' && code[i + 1] == '/') && code[i] != '\0') i++;
+                i += 2; 
+                continue;
+            }
+        }
+
+        // 3. Identify Identifiers (max length logic built-in)
+        if (isalpha(code[i])) {
+            printf("Identifier: ");
+            int count = 0;
+            while (isalnum(code[i]) && count < 31) {
+                putchar(code[i++]);
+                count++;
+            }
+            printf("\n");
+        } 
+        // 4. Identify Constants
+        else if (isdigit(code[i])) {
+            printf("Constant:   ");
+            while (isdigit(code[i])) putchar(code[i++]);
+            printf("\n");
+        } 
+        // 5. Identify Operators
+        else if (strchr("+-*=/><", code[i])) {
+            printf("Operator:   %c\n", code[i++]);
+        } 
+        else {
+            i++; // Skip unknown characters (like ;)
+        }
+    }
+}
