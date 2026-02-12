@@ -1,0 +1,21 @@
+%{
+%}
+
+%%
+
+^[-+/*%^]$ {
+printf("Given input is a valid Operator\n");
+}
+
+.+ {
+printf("Given input is not valid \n");
+}
+
+%%
+
+int yywrap(){}
+
+int main(){
+printf("Enter the Operator : \n");
+yylex();
+}
