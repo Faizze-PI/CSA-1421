@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<ctype.h>
+void FIRST(char c);
+int n;
+char a[10][10];
+void main() {
+    int i; char c;
+    printf("Enter number of productions: ");
+    scanf("%d", &n);
+    printf("Enter productions (e.g., S=Ab): \n");
+    for(i=0; i<n; i++) scanf("%s", a[i]);
+    do {
+        printf("Find FIRST of: ");
+        scanf(" %c", &c);
+        FIRST(c);
+        printf("\nContinue? (y/n): ");
+        scanf(" %c", &c);
+    } while(c=='y');
+}
+void FIRST(char c) {
+    int j;
+    if(!(isupper(c))) printf("%c ", c);
+    for(j=0; j<n; j++) {
+        if(a[j][0]==c) {
+            if(a[j][2]=='$') printf("$ ");
+            else if(islower(a[j][2])) printf("%c ", a[j][2]);
+            else FIRST(a[j][2]);
+        }
+    }
+}
