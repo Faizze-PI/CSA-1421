@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void main() {
+    int choice, n=0, i;
+    char symbols[10][10], label[10];
+    while(1) {
+        printf("\n1.Insert 2.Display 3.Search 4.Exit: ");
+        scanf("%d", &choice);
+        switch(choice) {
+            case 1: printf("Enter label: "); scanf("%s", symbols[n++]); break;
+            case 2: for(i=0; i<n; i++) printf("%d\t%s\n", i, symbols[i]); break;
+            case 3: printf("Search label: "); scanf("%s", label);
+                    for(i=0; i<n; i++) if(strcmp(symbols[i], label)==0) printf("Found at %d", i);
+                    break;
+            case 4: exit(0);
+        }
+    }
+}
