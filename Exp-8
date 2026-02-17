@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<string.h>
+void main() {
+    char junk, non_terminal, alpha[10], beta[10], production[20];
+    int i, j=0, k=0, len;
+    printf("Enter production (e.g., E->E+T|T): ");
+    scanf("%s", production);
+    non_terminal = production[0];
+    if(production[0] == production[3]) {
+        for(i=4; production[i] != '|'; i++) alpha[j++] = production[i];
+        alpha[j] = '\0';
+        for(i = i + 1; production[i] != '\0'; i++) beta[k++] = production[i];
+        beta[k] = '\0';
+        printf("After eliminating left recursion:\n");
+        printf("%c -> %s%c'\n", non_terminal, beta, non_terminal);
+        printf("%c' -> %s%c' | $\n", non_terminal, alpha, non_terminal);
+    } else printf("No left recursion.\n");
+}
