@@ -1,0 +1,10 @@
+%{
+int counter = 0;
+%}
+%%
+[a-zA-Z]+ { if (yyleng > counter) { counter = yyleng; } }
+%%
+int main() {
+    yylex();
+    printf("largest length is %d\n", counter);
+}
