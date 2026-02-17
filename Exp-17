@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<string.h>
+int n, top = -1;
+char pro[10][10], res[10];
+void push(char c) { res[++top] = c; }
+void main() {
+    int i, j;
+    printf("Enter no. of productions: ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++) scanf("%s", pro[i]);
+    for (i = 0; i < n; i++) {
+        printf("\nLEADING(%c): { ", pro[i][0]);
+        if (!isupper(pro[i][2])) printf("%c ", pro[i][2]);
+        else if (pro[i][3] != '\0') printf("%c ", pro[i][3]);
+        printf("}");
+        
+        printf("\tTRAILING(%c): { ", pro[i][0]);
+        int len = strlen(pro[i]);
+        if (!isupper(pro[i][len - 1])) printf("%c ", pro[i][len - 1]);
+        else printf("%c ", pro[i][len - 2]);
+        printf("}");
+    }
+}
